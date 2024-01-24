@@ -2,9 +2,21 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Routes, Redirect } from "react-router-dom";
 import Mainpage from "./Components/mainpage";
 import Navbar from "./Components/Navbar";
+import About from "./Components/About";
+import Contacts from "./Components/Contacts";
+import Events from "./Components/Events";
 
 function App() {
-  return <Navbar />;
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/about" element={<About />} />
+        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/events" element={<Events />} />
+      </Routes>
+    </>
+  );
 
   /*
     <div className="App">
