@@ -1,8 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router } from "react-router-dom";
+import { Route, Routes, Redirect } from "react-router-dom";
+import Mainpage from "./Components/mainpage";
+import Navbar from "./Components/Navbar";
 
 function App() {
-  return (
+  return <Navbar />;
+
+  /*
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -18,8 +22,7 @@ function App() {
           Learn React
         </a>
       </header>
-    </div>
-  );
+    </div>*/
 }
 
 export default App;
