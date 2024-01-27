@@ -6,6 +6,10 @@ import About from "./Components/About";
 import Contacts from "./Components/Contacts";
 import Events from "./Components/Events";
 import Login from "./Components/Login";
+import Register from "./Components/Register";
+import axios from 'axios';
+import {Toaster } from 'react-hot-toast'
+
 
 function page1() {
   return (
@@ -29,25 +33,18 @@ function page2() {
   );
 }
 
+
+axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.withCredentials = true;
 function App() {
-  return page2();
-  /*
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>*/
+  return (  <>
+  <Toaster position="bottom-right" toastOptions={{duration: 2000}}/>
+    <Routes>
+      <Route path="/" element={<Mainpage />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/Login" element={<Login />} />
+    </Routes>
+  </>)
 }
 
 export default App;

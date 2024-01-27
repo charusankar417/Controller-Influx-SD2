@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+
+body{
+    position: absolute;
+    background: linear-gradient(90deg, #000000, #000000);
+    position: relative;	
+    padding: 0%;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    margin-top: 0%;
+}
+
+.register{
+  background: linear-gradient(90deg, rgb(255, 255, 255), #fdf6e5);
+  opacity: 90%;
+  margin: auto;
+  width: 50%;
+  border: 1px solid rgb(31, 30, 5);
+  padding: 10px;
+  margin-top: 25%;
+  height: 350px;
+  width: 300px;
+  box-shadow: 2px 2px 10px #888888;
+  border-radius: 1rem;
+}
+
+form.form1 {
+    align-items: center;
+    margin-top: 10%
+}
+
+label.email{
+    cursor: default;
+    font-family: 'Nunito', sans-serif;
+    align-items: center;
+    text-align: center;
+}
+
+button {
+    background-color: #aa9104;
+    color: rgb(255, 255, 255);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  button:hover {
+    opacity: 0.8;
+  }
+
+  input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 0.5px solid #ccc;
+    box-sizing: border-box;
+  }
+
+::placeholder{
+    font-family: 'Nunito', sans-serif;
+  }
+
+  
