@@ -7,9 +7,9 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <nav>
-      <NavLink className="title" to="/">
+      <Link className="title" to="/">
         Controller Name{" "}
-      </NavLink>
+      </Link>
       <div
         className="menu"
         onClick={() => {
