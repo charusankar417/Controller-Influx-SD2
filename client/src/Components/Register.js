@@ -4,6 +4,7 @@ import "./Register.css"
 import axios from 'axios'
 import {toast} from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import Navbar from './Navbar'
 
 const Register = () => {
   const navigate = useNavigate()
@@ -35,20 +36,29 @@ const Register = () => {
   }
   return (
 
-    <div className="">
-        <div className="register">
+    <body id="bg">
+      <Navbar/>
         <form className='form1' onSubmit={registerUser}>
-            <label className='email'>Email</label>
+          <div className='entry'>
+            <label className='l'>Email</label>
             <input type="text" placeholder="Email Address" value={data.email} onChange={(e) => setData({...data, email: e.target.value})}></input>
-            <label>Username</label>
+            <label className='l'>Username</label>
             <input type="text" placeholder="Username" value={data.username} onChange={(e) => setData({...data, username: e.target.value})}></input>
-            <label>Password</label>
+            <label className='l'>Password</label>
             <input type="text" placeholder="Password" value={data.password} onChange={(e) => setData({...data, password: e.target.value})}></input>
-            <button type="submit">Register!</button>
+          </div>
+          <div>
+          <button className="reg-btn" type="submit">Register!</button>
+          </div>
+          
+            <div className='login'>
+              Already an admin?
+              <a href="/login"> Log In </a>
+            </div>
+            
         </form>
-    </div>
+    </body>
 
-    </div>
    
     
   )
