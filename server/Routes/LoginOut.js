@@ -7,7 +7,7 @@ const {test, register, login} = require("../Controllers/authController.js")
 router.use(
   cors({
     credentials: true,
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:3002',
   }
   )
 )
@@ -15,7 +15,6 @@ router.use(
 router.get('/', test);
 router.post('/register', register)
 router.post('/login', login)
-
 module.exports = router;
 /*
 const jwt = require("jsonwebtoken");

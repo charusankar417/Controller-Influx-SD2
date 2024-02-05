@@ -9,6 +9,7 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import axios from 'axios';
 import {Toaster } from 'react-hot-toast'
+import Admin from "./Components/Admin";
 
 
 function page1() {
@@ -43,6 +44,7 @@ function App() {
       <Route path="/" element={<Mainpage />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/admin" element={<Admin/>}/>
     </Routes>
   </>)
 }

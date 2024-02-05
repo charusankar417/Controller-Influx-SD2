@@ -19,6 +19,7 @@ const Login = () => {
     
     const {username,password} = data
     try{
+
       const {data} = await axios.post('/login', {
         username, 
         password
@@ -28,16 +29,16 @@ const Login = () => {
         toast.error(data.error)
       } else {
         setData({})
+        console.log("Success!")
         toast.success('Welcome!')
-        navigate('/')
+        navigate('/admin')
       }
     }catch(error){
       console.log(error)
     }
   }
   return (
-    
-    <body id="bg">
+    <div id="bg">
       <Navbar/>
           <form onSubmit={loginUser} className="form-div">
             <div className="entry">
@@ -46,16 +47,17 @@ const Login = () => {
                 <input type="text" placeholder="Username" value={data.username} onChange={(e) => setData({...data, username: e.target.value})}></input>
               </div>
               <div className="e1"><label>Password</label>
-            <input type="text" placeholder="Password" value={data.password} onChange={(e) => setData({...data, password: e.target.value})}></input></div>
-            
+            <input type="text" placeholder="Password" value={data.password} onChange={(e) => setData({...data, password: e.target.value})}></input>
             </div>
-            <div className="e2"><button type="submit" className="submit">Login!</button></div>
-            
-            <div class="register-q">New Admin?
+            </div>
+            <div className="e2">
+              <button type="submit" className="submit">Login!</button>
+            </div>
+            <div className="register-q">New Admin?
               <a href="http://localhost:3002/register"> Register Now!</a>
-          </div>
+            </div>
         </form>
-    </body>
+    </div>
   );
 };
 

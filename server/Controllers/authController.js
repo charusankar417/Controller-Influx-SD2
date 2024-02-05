@@ -56,6 +56,7 @@ const login = async(req, res) => {
     try{
         // take the username user logs in with and store in const username
         const {username, password} = req.body;
+        console.log(username)
 
         // Check if user exists
         const user = await User.findOne({username})
@@ -75,10 +76,6 @@ const login = async(req, res) => {
         }catch(error){
             console.log(error)
         }
-
-
-
-
     }catch(error){
 
     }

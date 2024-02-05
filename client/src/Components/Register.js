@@ -28,7 +28,6 @@ const Register = () => {
             setData({})
             toast.success('Registration Succesful. Welcome!')
             navigate('/login')
-            
         }
     } catch (error) {
         console.log(error)
@@ -36,7 +35,7 @@ const Register = () => {
   }
   return (
 
-    <body id="bg">
+    <div id="bg">
       <Navbar/>
         <form className='form1' onSubmit={registerUser}>
           <div className='entry'>
@@ -57,7 +56,7 @@ const Register = () => {
             </div>
             
         </form>
-    </body>
+    </div>
 
    
     
