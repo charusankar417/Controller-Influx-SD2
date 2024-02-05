@@ -1,6 +1,72 @@
-.main-pg {
-  background-color: aliceblue;
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Raleway&display=swap');
+body #main-rso {
+  background: radial-gradient( ellipse at center, rgb(199, 147, 244), rgb(115, 80, 161), rgb(55, 19, 84) );
   width: 100%;
-  height: 100%;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  height: 100vh;
+  font-family: 'Nanum Gothic Coding', monospace;
+font-family: 'Raleway', sans-serif;
+}
+
+.container{
+  position: relative;
+  justify-content: center;
+  width: 50%;
+  height: 70%;
+  border-radius: 40px;
+  margin-left: 5vh;
+  margin-top: 10vh;
+
+  background-color: rgb(0, 0, 0);
+
+}
+.intro{
+  position: absolute;
+  justify-content: center;
+  width: 95%;
+  height: 95%;
+  border-radius: 40px;
+  margin-right: -5vh;
+  opacity: 0.8;
+  color:rgb(9, 3, 3);
+  background-color: rgb(243, 244, 240);
+  animation: fadeIn 1s;
+  border-color: black;
+  overflow: scroll;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0.6;}
+  100% { opacity: 0.8;}
+}
+
+.intro-text{
+  justify-content: center;
+  color: rgb(55, 19, 84);
+  height: 10%;
+  position: relative;
+  display: block ;
+  margin-left: 10vh;
+  margin-top: 5vh;
+  font-size: 40px;
+  font-weight: bolder;
+  font-family: 'Nanum Gothic Coding', monospace;
+  font-family: 'Raleway', sans-serif;
+  
+}
+
+.about{
+justify-content: center;
+position: relative;
+margin-left: 0vh;
+margin-top: 5vh;
+margin-right: 5vh;
+}
+
+.about p{
+font-size: 20px;
+color: rgb(0, 0, 0);
+font-family: 'Nanum Gothic Coding', monospace;
+font-family: 'Raleway', sans-serif;
+padding: 1px;
+
 }

@@ -9,17 +9,18 @@ const hashPwd = (password) => {
                 if(err){
                     reject(err)
                 }
+                resolve(hash)
             })
-            resolve(hash)
+            
         })
     })
 }
 
-const comparePWD = (password, hashed) => {
+const comparePwd = (password, hashed) => {
     return bcrypt.compare(password, hashed)
 }
 
 module.exports = {
     hashPwd,
-    comparePWD
+    comparePwd
 }

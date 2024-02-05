@@ -25,8 +25,8 @@ const Register = () => {
         }
         else{
             setData({})
-            toast.success('Login Succesful. Welcome!')
-            navigate('/Login')
+            toast.success('Registration Succesful. Welcome!')
+            navigate('/login')
             
         }
     } catch (error) {

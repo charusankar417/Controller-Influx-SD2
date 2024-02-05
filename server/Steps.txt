@@ -1,0 +1,5 @@
+In Routes, create a new route (LoginOut.js)
+In controller, create the function for the route (authController)
+
+This just keeps the routes cleaner
+

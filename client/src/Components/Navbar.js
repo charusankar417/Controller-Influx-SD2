@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <nav>
       <Link className="title" to="/">
-        Controller Name{" "}
+        UCF | Knight Hacks{" "}
       </Link>
       <div
         className="menu"
@@ -22,13 +22,13 @@ const Navbar = () => {
       </div>
       <ul className={menuOpen ? "open" : ""}>
         <li>
-          <NavLink to="/about">About </NavLink>
-        </li>
-        <li>
           <NavLink to="/socials">Socials</NavLink>
         </li>
         <li>
           <NavLink to="/events">Events </NavLink>
+        </li>
+        <li>
+          <NavLink to="/login">Admin</NavLink>
         </li>
       </ul>
     </nav>
