@@ -31,7 +31,7 @@ const Login = () => {
         setData({})
         console.log("Success!")
         toast.success('Welcome!')
-        navigate('/admin')
+        navigate('/admin', {replace: true})
       }
     }catch(error){
       console.log(error)

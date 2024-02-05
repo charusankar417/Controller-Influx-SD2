@@ -5,11 +5,14 @@ const axios = require("axios");
 const cors = require("cors");
 const url = require("url");
 const { error } = require("console");
+const cookieParser = require("cookie-parser")
 // const port = process.env.PORT || 3001;
 //const router = express.Router();
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({extended: false}));
 app.use(cors({
   origin: 'http://localhost:3002',
   credentials: true

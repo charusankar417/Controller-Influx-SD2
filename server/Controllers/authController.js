@@ -1,7 +1,8 @@
 const User = require('../Models/AdminSchema')
 const {hashPwd, comparePwd} = require('../helpers/auth')
-
-
+const bcrypt = require("bcrypt")
+const JWT = require("jsonwebtoken")
+require('dotenv')
 const test = (req, res) => {
     res.json('test is working')
 }
@@ -41,7 +42,7 @@ const register = async(req, res) => {
 
        // create user with req.body infromation
        const user = User.create({
-        email, username, password: hashedPwd
+        email, username, password:hashedPwd
        })
 
        return res.json(user)
@@ -57,7 +58,7 @@ const login = async(req, res) => {
         // take the username user logs in with and store in const username
         const {username, password} = req.body;
         console.log(username)
-
+        console.log(password)
         // Check if user exists
         const user = await User.findOne({username})
         if(!user){
@@ -68,14 +69,26 @@ const login = async(req, res) => {
 
         // If user exists, then check passwords match
         const match = await comparePwd(password, user.password)
-        try{
-            if(match){
-                // assign a JWT (aka cookie)
-                
-            }
-        }catch(error){
-            console.log(error)
+        console.log(match)
+
+        if(match){
+            JWT.sign({username: user.username, id: user_id, name: user.name}, process.env.JWT_SECRET, 
+                {}, (err, token)  => {
+                    if(err) throw err
+
+                    res.cookie('token', token).json(user)
+                })
+            res.json(
+                'passwords match'
+            )
         }
+        else{
+            return res.json({
+                error: 'Incorrect Password'
+            })
+        }
+                
+            
     }catch(error){
 
     }
