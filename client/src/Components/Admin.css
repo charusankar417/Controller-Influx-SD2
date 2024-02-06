@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Raleway&display=swap");
+#main {
+  background: radial-gradient(
+    ellipse at center,
+    rgb(199, 147, 244),
+    rgb(115, 80, 161),
+    rgb(55, 19, 84)
+  );
+
+  width: 100%;
+  height: 100vh;
+  font-family: "Nanum Gothic Coding", monospace;
+  font-family: "Raleway", sans-serif;
+  color: white;
+}

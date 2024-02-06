@@ -1,20 +1,24 @@
 const express = require("express");
 const router = express.Router();
-const cors = require('cors');
-const {test, register, login} = require("../Controllers/authController.js")
-
+const cors = require("cors");
+const {
+  test,
+  register,
+  login,
+  profile,
+} = require("../Controllers/authController.js");
 
 router.use(
   cors({
     credentials: true,
-    origin: 'http://localhost:3002',
-  }
-  )
-)
+    origin: "http://localhost:3002",
+  })
+);
 
-router.get('/', test);
-router.post('/register', register)
-router.post('/login', login)
+router.get("/", test);
+router.post("/register", register);
+router.post("/login", login);
+router.get("/profile", profile);
 module.exports = router;
 /*
 const jwt = require("jsonwebtoken");

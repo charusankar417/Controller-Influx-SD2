@@ -7,10 +7,10 @@ import Contacts from "./Components/Contacts";
 import Events from "./Components/Events";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
-import axios from 'axios';
-import {Toaster } from 'react-hot-toast'
+import axios from "axios";
+import { Toaster } from "react-hot-toast";
 import Admin from "./Components/Admin";
-
+import { UserContextProvider } from "./context/userContext";
 
 function page1() {
   return (
@@ -34,19 +34,20 @@ function page2() {
   );
 }
 
-
-axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
 function App() {
-  return (  <>
-  <Toaster position="bottom-right" toastOptions={{duration: 2000}}/>
-    <Routes>
-      <Route path="/" element={<Mainpage />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/admin" element={<Admin/>}/>
-    </Routes>
-  </>)
+  return (
+    <UserContextProvider>
+      <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
+      <Routes>
+        <Route path="/" element={<Mainpage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<Admin />} />
+      </Routes>
+    </UserContextProvider>
+  );
 }
 
 export default App;
