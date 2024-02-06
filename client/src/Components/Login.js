@@ -29,11 +29,7 @@ const Login = () => {
         setData({});
         console.log("Success!");
         toast.success("Welcome!");
-        try {
-          navigate("/admin", { replace: true });
-        } catch (err) {
-          console.log(err);
-        }
+        navigate("/admin", { replace: true });
       }
     } catch (error) {
       console.log(error);
