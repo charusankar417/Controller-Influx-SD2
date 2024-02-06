@@ -7,7 +7,7 @@ const cookies = require("cookies");
 const test = (req, res) => {
   res.json("test is working");
 };
-
+require("dotenv").config();
 // Register Endpoint; endpoint connected to route in LoginOut.js
 const register = async (req, res) => {
   try {
@@ -58,8 +58,6 @@ const login = async (req, res) => {
   try {
     // take the username user logs in with and store in const username
     const { username, password } = req.body;
-    // console.log(username);
-    // console.log(password);
     // Check if user exists
     const user = await User.findOne({ username });
     if (!user) {
@@ -73,39 +71,29 @@ const login = async (req, res) => {
     console.log(match);
 
     if (match) {
-      /*
-      const token = await jwt.sign(user.username, process.env.JWT_SECRET, {
-        expiresIn: "24h",
-      });
-      res.set("authorization", token);
-      res.redirect("/admin");
-      res.end();*/
-
-      // res.json("passwords match");
-
-      jwt
-        .sign(
-          { username: user.username, id: user._id, email: user.email },
-          process.env.JWT_SECRET,
-          {},
-          (err, token) => {
-            res.cookie("token", token).json(user);
-            res.json({ token });
-
-            res.json("Passwords match");
-            if (err) {
-              throw err;
-            }
+      jwt.sign(
+        { username: user.username, id: user._id, email: user.email },
+        process.env.JWT_SECRET,
+        {},
+        (err, token) => {
+          if (err) {
+            throw err;
           }
-        )
-        .status(200);
-      console.log("token", token);
+          res
+            .cookie("token", token)
+            .json(user)
+            .status(200);
+          res.json("Password Match");
+        }
+      );
     } else {
       return res.json({
         error: "Incorrect Password",
       });
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const profile = (req, res) => {

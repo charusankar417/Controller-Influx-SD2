@@ -12,28 +12,6 @@ import { Toaster } from "react-hot-toast";
 import Admin from "./Components/Admin";
 import { UserContextProvider } from "./context/userContext";
 
-function page1() {
-  return (
-    <>
-      <Navbar />
-      <Routes>
-        <Route path="/about" element={<About />} />
-        <Route path="/socials" element={<Contacts />} />
-        <Route path="/events" element={<Events />} />
-      </Routes>
-    </>
-  );
-}
-function page2() {
-  return (
-    <>
-      <Routes>
-        <Route path="/Login" element={<Login />} />
-      </Routes>
-    </>
-  );
-}
-
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
 function App() {
