@@ -58,8 +58,8 @@ const login = async (req, res) => {
   try {
     // take the username user logs in with and store in const username
     const { username, password } = req.body;
-    console.log(username);
-    console.log(password);
+    // console.log(username);
+    // console.log(password);
     // Check if user exists
     const user = await User.findOne({ username });
     if (!user) {
@@ -85,7 +85,7 @@ const login = async (req, res) => {
 
       jwt
         .sign(
-          { user: user.username, id: user._id, name: user.name },
+          { username: user.username, id: user._id, email: user.email },
           process.env.JWT_SECRET,
           {},
           (err, token) => {
