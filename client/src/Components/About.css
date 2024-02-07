@@ -1,5 +1,11 @@
-body {
-  background-color: rgb(26, 21, 21);
+#abt-main {
+  /*background: radial-gradient( ellipse at center, rgb(199, 147, 244), rgb(115, 80, 161), rgb(55, 19, 84) );*/
+  background: linear-gradient(
+    150deg,
+    rgb(248, 243, 253) 10.9%,
+    rgb(223, 207, 255) 27.8%,
+    rgb(159, 134, 188) 101.7%
+  );
 }
 
 h1,

@@ -11,6 +11,8 @@ import axios from "axios";
 import { Toaster } from "react-hot-toast";
 import Admin from "./Components/Admin";
 import { UserContextProvider } from "./context/userContext";
+import CreateEvent from "./Components/CreateEvent";
+import Members from "./Components/Members";
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
@@ -23,6 +25,10 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/event/create" element={<CreateEvent />} />
+        <Route path="/socials" element={<Contacts />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/member/details" element={<Members />} />
       </Routes>
     </UserContextProvider>
   );

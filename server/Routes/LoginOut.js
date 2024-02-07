@@ -6,6 +6,7 @@ const {
   register,
   login,
   profile,
+  display,
 } = require("../Controllers/authController.js");
 
 router.use(
@@ -19,6 +20,7 @@ router.get("/", test);
 router.post("/register", register);
 router.post("/login", login);
 router.get("/profile", profile);
+router.get("/member/details", display);
 module.exports = router;
 /*
 const jwt = require("jsonwebtoken");

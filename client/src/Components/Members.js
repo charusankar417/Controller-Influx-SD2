@@ -4,11 +4,9 @@ import Navbar from "./Navbar";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import "./Events.css";
+import "./Members.css";
 
-const Events = () => {
-  return <div>Events page</div>;
-  /*
+const Members = () => {
   const [users, setUsers] = useState([]);
   const event = useEffect(() => {
     axios
@@ -38,7 +36,7 @@ const Events = () => {
         </table>
       </div>
     </div>
-  );*/
+  );
 };
 
-export default Events;
+export default Members;

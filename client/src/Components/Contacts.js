@@ -1,10 +1,12 @@
 import React from "react";
 import "./Contacts.css";
 import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const Contacts = () => {
   return (
-    <div className="main">
+    <div id="main">
+      <Navbar />
       <h1>Join Knight Hacks</h1>
       <p>
         <Link className="link" href="https://knighthacks.org/.">

@@ -3,7 +3,7 @@ import "./About.css";
 
 const About = () => {
   return (
-    <div className="main">
+    <div id="abt-main">
       <h1>UCF Knight Hacks</h1>
       <p>
         The Knight Hacks hackathon is a 36-hour hackathon hosted by Knight

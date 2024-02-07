@@ -111,9 +111,16 @@ const profile = (req, res) => {
     res.json(null);
   }
 };
+
+const display = (req, res) => {
+  User.find()
+    .then((users) => res.json(users))
+    .catch((err) => res.json(err));
+};
 module.exports = {
   test,
   register,
   login,
   profile,
+  display,
 };

@@ -1,16 +1,28 @@
-body {
-  background-color: rgb(255, 255, 255);
+#main {
+  /*background: radial-gradient( ellipse at center, rgb(199, 147, 244), rgb(115, 80, 161), rgb(55, 19, 84) );*/
+  background: linear-gradient(
+    150deg,
+    rgb(248, 243, 253) 10.9%,
+    rgb(223, 207, 255) 27.8%,
+    rgb(159, 134, 188) 101.7%
+  );
 }
 
 h1,
 p {
-  color: white;
+  color: rgb(0, 0, 0);
   display: flex;
 }
 
 .link {
   width: 0rem;
-  color: white;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+.link:hover {
+  width: 0rem;
+  color: rgb(254, 254, 254);
   text-decoration: none;
 }
 
