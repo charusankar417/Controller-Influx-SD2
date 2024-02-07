@@ -2,7 +2,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Routes, Redirect } from "react-router-dom";
 import Mainpage from "./Components/mainpage";
 import Navbar from "./Components/Navbar";
-import About from "./Components/About";
 import Contacts from "./Components/Contacts";
 import Events from "./Components/Events";
 import Login from "./Components/Login";

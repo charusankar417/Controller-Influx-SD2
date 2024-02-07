@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 import "./Members.css";
 
 const Members = () => {
+
+  // fetch users from DB via backend API endpoint /member/details
   const [users, setUsers] = useState([]);
   const event = useEffect(() => {
     axios
@@ -15,6 +17,7 @@ const Members = () => {
       .catch((err) => console.log(err));
   }, []);
   return (
+    // return retrieved data and display as a table
     <div id="main-bg">
       <Navbar />
       <div className="users-table">

@@ -10,6 +10,7 @@ const Admin = () => {
   const { user } = useContext(UserContext);
   console.log(user);
 
+  // async functions envelope navigation to respective pages
   const event = async (e) => {
     e.preventDefault();
 
@@ -33,6 +34,7 @@ const Admin = () => {
     navigate("/member/details");
   };
   return (
+    
     <div id="main">
       <Navbar />
       <div className="welcome">{!!user && <h1>Hi {user.username}!</h1>}</div>

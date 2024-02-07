@@ -1,4 +1,3 @@
-
 const express = require("express");
 const mongoose = require("mongoose");
 const axios = require("axios");
@@ -18,18 +17,12 @@ app.use(cors({
   credentials: true
 }));
 
-
-//app.use("/auth", router);
 try {
   const db = mongoose.connect("mongodb://localhost:27017/Controller1");
   console.log("Connected");
 } catch (error) {
   handleError(error);
 }
-
-/*
-app.listen(4001, () => console.log("Server is Running"));
-*/
 
 app.use("/", require("./Routes/LoginOut"));
 
