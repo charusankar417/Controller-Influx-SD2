@@ -1,4 +1,5 @@
 const User = require("../Models/AdminSchema");
+const User1 = require("../Models/user-model");
 const { hashPwd, comparePwd } = require("../helpers/auth");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -7,7 +8,59 @@ const cookies = require("cookies");
 const test = (req, res) => {
   res.json("test is working");
 };
+
 require("dotenv").config();
+
+const firstTimeQ = async (req, res) => {
+  try {
+    console.log(req);
+    console.log(req.query);
+    // rename req.body information sent by user
+    const { name, major, gradDate } = req.query;
+    // three if statements check if form fields are entered
+    // toast picks up error body and displays as notification
+    if (!name) {
+      return res.json({
+        error: "Name is required",
+      });
+    }
+    if (!major) {
+      return res.json({
+        error: "major is required",
+      });
+    }
+    if (!gradDate) {
+      return res.json({
+        error: "Grad Date Required",
+      });
+    }
+
+    const exist = await User1.findOne({ name });
+    if (exist) {
+      return res.json({
+        error: "User (Name) Exists",
+      });
+    }
+
+    // create a hashed password using hashPwd helper function
+    // const hashedPwd = await hashPwd(password);
+    //console.log("Addded");
+    // create user with req.body infromation
+    const user = User1.create({
+      name,
+      major,
+      gradDate,
+    });
+
+    if (User1.find()) {
+      console.log("Addded");
+    }
+
+    return res.json(user);
+  } catch (error) {
+    console.log(error);
+  }
+};
 // Register Endpoint; endpoint connected to route in LoginOut.js
 const register = async (req, res) => {
   try {
@@ -117,10 +170,29 @@ const display = (req, res) => {
     .then((users) => res.json(users))
     .catch((err) => res.json(err));
 };
+const authenticate = async (req, res, next) => {
+  const token = req.cookies.access_token;
+  console.log("token", token);
+  try {
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = user;
+    next();
+  } catch (error) {
+    console.log(error);
+    res.clearCookie("access_token");
+    // token = req.cookies.access_token;
+    if (!token) {
+      console.log("here");
+      res.redirect(301, "http://localhost:3000/");
+    }
+  }
+};
 module.exports = {
   test,
   register,
   login,
   profile,
   display,
+  firstTimeQ,
+  authenticate,
 };
