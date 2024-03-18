@@ -1,5 +1,6 @@
 const User = require("../Models/AdminSchema");
-const User1 = require("../Models/user-model");
+const clubMember = require("../Models/user-model");
+const Admin = require("../Models/admin-model.js");
 const { hashPwd, comparePwd } = require("../helpers/auth");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -13,10 +14,16 @@ require("dotenv").config();
 
 const firstTimeQ = async (req, res) => {
   try {
-    console.log(req);
+    // console.log(req);
     console.log(req.query);
     // rename req.body information sent by user
-    const { name, major, gradDate } = req.query;
+    const UID = req.query.UID;
+    const { name, major, gradDate, clubName } = req.query.data;
+    console.log(name);
+    console.log(major);
+    console.log(gradDate);
+    console.log(clubName);
+
     // three if statements check if form fields are entered
     // toast picks up error body and displays as notification
     if (!name) {
@@ -34,11 +41,16 @@ const firstTimeQ = async (req, res) => {
         error: "Grad Date Required",
       });
     }
+    if (!clubName) {
+      return res.json({
+        error: "Club Name Required",
+      });
+    }
 
-    const exist = await User1.findOne({ name });
+    const exist = await clubMember.findOne({ UID });
     if (exist) {
       return res.json({
-        error: "User (Name) Exists",
+        error: true,
       });
     }
 
@@ -46,19 +58,62 @@ const firstTimeQ = async (req, res) => {
     // const hashedPwd = await hashPwd(password);
     //console.log("Addded");
     // create user with req.body infromation
-    const user = User1.create({
+    const user = clubMember.create({
+      UID,
       name,
       major,
       gradDate,
+      clubName,
     });
 
-    if (User1.find()) {
+    (await user).save();
+
+    if (clubMember.find()) {
       console.log("Addded");
     }
-
-    return res.json(user);
+    return res.json(user.clubName);
   } catch (error) {
     console.log(error);
+  }
+};
+
+const updateQR = async (req, res) => {
+  // console.log("request from qr on main", req);
+  // console.log(req);
+  // const uid = req.query;
+  // console.log(uid);
+  //const exist = await User1.findOne({ UID: req });
+  //if (exist) {
+  return res.json({
+    error: "test",
+  });
+  //}
+};
+const defaultAdmin = async (req, res) => {
+  const password = "123456";
+  const hashedPwd = await hashPwd(password);
+  var count = 0;
+
+  const admin = await Admin.findOne({
+    username: "default",
+    password: hashedPwd,
+  });
+  if (!admin) {
+    try {
+      var defAdmin = new Admin({
+        username: "default",
+        password: hashedPwd,
+      });
+      if (count == 0) {
+        await defAdmin.save();
+        count = 1;
+      }
+      console.log("success");
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    return res.json({ error: true });
   }
 };
 // Register Endpoint; endpoint connected to route in LoginOut.js
@@ -108,11 +163,14 @@ const register = async (req, res) => {
 };
 // Login Endpoint;endpoint connected to route in LoginOut.js
 const login = async (req, res) => {
+  defaultAdmin(req, res);
   try {
     // take the username user logs in with and store in const username
     const { username, password } = req.body;
+    console.log("username", username, password);
     // Check if user exists
-    const user = await User.findOne({ username });
+    const user = await Admin.findOne({ username });
+    console.log(user);
     if (!user) {
       return res.json({
         error: "No user found",
@@ -148,25 +206,66 @@ const login = async (req, res) => {
     console.log(error);
   }
 };
-
+const Logout = async (req, res) => {
+  console.log(req.cookies.token);
+  res.clearCookie("token");
+  res.status(200).json({ error: true });
+};
 const profile = (req, res) => {
-  const { token } = req.cookies;
-  console.log(token);
-  if (token) {
+  try {
+    const { token } = req.cookies.token;
+    console.log(token);
+    if (token) {
+      try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log(decoded);
+        res.json(decoded);
+      } catch (err) {
+        if (err.name === "TokenExpiredError") {
+          console.error("JWT token has expired");
+          // Handle expired token error
+        } else if (err.name === "JsonWebTokenError") {
+          console.error("JWT verification failed:", err.message);
+          // Handle other JWT verification errors
+        } else {
+          console.error("JWT verification failed:", err);
+          // Handle other errors
+        }
+      }
+      /*
     jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
       if (err) {
         throw err;
       }
       console.log("here");
       res.json(user);
-    });
-  } else {
-    res.json(null);
+      if (err) {
+        if (err.name === "TokenExpiredError") {
+          console.error("JWT token has expired");
+          // Handle expired token error
+        } else if (err.name === "JsonWebTokenError") {
+          console.error("JWT verification failed:", err.message);
+          // Handle other JWT verification errors
+        } else {
+          console.error("JWT verification failed:", err);
+          // Handle other errors
+        }
+      } else {
+        console.log("Decoded token:", user);
+        res.json(user);
+      }
+    });*/
+    } else {
+      res.json({ error: true });
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
 
 const display = (req, res) => {
-  User.find()
+  clubMember
+    .find()
     .then((users) => res.json(users))
     .catch((err) => res.json(err));
 };
@@ -195,4 +294,7 @@ module.exports = {
   display,
   firstTimeQ,
   authenticate,
+  updateQR,
+  defaultAdmin,
+  Logout,
 };

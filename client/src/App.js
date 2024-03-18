@@ -28,6 +28,7 @@ function App() {
         <Route path="/socials" element={<Contacts />} />
         <Route path="/events" element={<Events />} />
         <Route path="/member/details" element={<Members />} />
+        <Route path="/path to Stripe" element={<Members />} />
       </Routes>
     </UserContextProvider>
   );

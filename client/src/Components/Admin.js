@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
 import { useNavigate } from "react-router";
+import axios from "axios";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -33,8 +34,20 @@ const Admin = () => {
     e.preventDefault();
     navigate("/member/details");
   };
+  const logOut = async (e) => {
+    axios.defaults.withCredentials = true;
+    e.preventDefault();
+    try {
+      await axios.get("/logout", {}, { withCredentials: true }).then((res) => {
+        console.log(res);
+        navigate("/login");
+      });
+    } catch (err) {
+      console.log(err);
+    }
+    // navigate("/admin/login");
+  };
   return (
-    
     <div id="main">
       <Navbar />
       <div className="welcome">{!!user && <h1>Hi {user.username}!</h1>}</div>
@@ -58,6 +71,9 @@ const Admin = () => {
           </button>
           <button class="button-17" onClick={member}>
             Member Details
+          </button>
+          <button class="button-17" onClick={logOut}>
+            Log Out
           </button>
         </ul>
       </div>

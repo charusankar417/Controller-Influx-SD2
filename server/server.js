@@ -14,14 +14,30 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
+    "Access-Control-Allow-Credentials": true,
     origin:
       "http://localhost:3000" ||
       "http://localhost:3001" ||
       "http://localhost:8000" ||
-      "http://localhost:3002",
+      "http://localhost:3002" ||
+      "localhost:8000",
     credentials: true,
   })
 );
+
+const corsOptions = {
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://localhost:8000",
+    "http://localhost:3002",
+    "localhost:8000",
+    "localhost:3000",
+  ],
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 try {
   const db = mongoose.connect("mongodb://localhost:27017/Controller1");

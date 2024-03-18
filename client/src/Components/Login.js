@@ -7,6 +7,7 @@ import "./Login.css";
 import Navbar from "./Navbar";
 
 const Login = () => {
+  axios.defaults.withCredentials = true;
   const navigate = useNavigate();
   const [data, setData] = useState({
     username: "",
@@ -14,15 +15,39 @@ const Login = () => {
   });
 
   const loginUser = async (e) => {
+    const headers = {
+      "Content-Type": "application/json;charset=UTF-8",
+      "Access-Control-Allow-Origin:": "http://localhost:3000",
+    };
+    axios.defaults.withCredentials = true;
     e.preventDefault();
 
     const { username, password } = data;
     try {
-      const { data } = await axios.post("/login", {
-        username,
-        password,
-      });
-
+      const { data } = await axios
+        .post(
+          "http://localhost:8000/login",
+          {
+            username,
+            password,
+          },
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        )
+        .then((res) => {
+          if (res.data.error) {
+            console.log(res.data.error);
+          } else {
+            setData({});
+            console.log("Success!");
+            toast.success("Welcome!");
+            navigate("/admin", { replace: true });
+          }
+        });
+      /*
       if (data.error) {
         toast.error(data.error);
       } else {
@@ -30,7 +55,7 @@ const Login = () => {
         console.log("Success!");
         toast.success("Welcome!");
         navigate("/admin", { replace: true });
-      }
+      }*/
     } catch (error) {
       console.log(error);
     }
@@ -46,6 +71,7 @@ const Login = () => {
               type="text"
               placeholder="Username"
               value={data.username}
+              id="in"
               onChange={(e) => setData({ ...data, username: e.target.value })}
             ></input>
           </div>
@@ -55,6 +81,7 @@ const Login = () => {
               type="password"
               placeholder="Password"
               value={data.password}
+              id="in"
               onChange={(e) => setData({ ...data, password: e.target.value })}
             ></input>
           </div>
@@ -63,10 +90,6 @@ const Login = () => {
           <button type="submit" className="submit">
             Login!
           </button>
-        </div>
-        <div className="register-q">
-          New Admin?
-          <a href="http://localhost:3002/register"> Register Now!</a>
         </div>
       </form>
     </div>

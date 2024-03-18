@@ -25,6 +25,9 @@ const Navbar = () => {
           <NavLink to="http://localhost:3000/dashboard">Influx</NavLink>
         </li>
         <li>
+          <NavLink to="/pay/dues/Stripe">Pay Dues</NavLink>
+        </li>
+        <li>
           <NavLink to="/socials">Socials</NavLink>
         </li>
         <li>

@@ -8,15 +8,33 @@ const {
   profile,
   display,
   firstTimeQ,
+  updateQR,
+  defaultAdmin,
+  Logout,
 } = require("../Controllers/authController.js");
 
 router.use(
   cors({
     credentials: true,
-    origin:
-      "http://localhost:3002" ||
-      "http://localhost:3000" ||
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:3002",
       "http://localhost:3001",
+      "localhost:8000",
+    ],
+    function(origin, callback) {
+      // Check if the origin is allowed or if it's a preflight request (OPTIONS)
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        origin.startsWith("http://localhost:") ||
+        origin.startsWith("https://localhost:")
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
   })
 );
 
@@ -26,4 +44,7 @@ router.post("/login", login);
 router.get("/profile", profile);
 router.get("/member/details", display);
 router.get("/one-time-signup-server", firstTimeQ);
+router.get("/updateQR", updateQR);
+router.get("/admin/default", defaultAdmin);
+router.get("/logout", Logout);
 module.exports = router;
